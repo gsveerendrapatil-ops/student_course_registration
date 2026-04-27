@@ -40,7 +40,7 @@ def student_list(request):
 
 def student_create(request):
     if request.method == "POST":
-        form = StudentForm(request.POST, request.FILES)
+        form = StudentForm(request.POST)
         if form.is_valid():
             form.save()
             messages.success(request, "Student registered successfully.")
@@ -57,7 +57,7 @@ def student_create(request):
 def student_update(request, pk):
     student = get_object_or_404(Student, pk=pk)
     if request.method == "POST":
-        form = StudentForm(request.POST, request.FILES, instance=student)
+        form = StudentForm(request.POST, instance=student)
         if form.is_valid():
             form.save()
             messages.success(request, "Student record updated successfully.")

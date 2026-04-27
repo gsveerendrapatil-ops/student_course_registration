@@ -1,8 +1,6 @@
 from django.core.exceptions import ValidationError
 from django.core.validators import MinValueValidator, RegexValidator
 from django.db import models
-from django.db.models.signals import post_delete
-from django.dispatch import receiver
 from django.utils import timezone
 
 # Create your models here.
@@ -31,7 +29,6 @@ class Student(models.Model):
         ]
     )
     admition_date = models.DateField()
-    st_photo = models.ImageField(upload_to="student_photo/", null=True, blank=True)
     st_active = models.CharField(
         max_length=10, choices=ST_ACTIVE_STATUS, default="active"
     )
@@ -52,9 +49,3 @@ class Course(models.Model):
 
     def __str__(self):
         return self.course_name
-
-
-@receiver(post_delete, sender=Student)
-def delete_student_photo(sender, instance, **kwargs):
-    if instance.st_photo:
-        instance.st_photo.delete(save=False)

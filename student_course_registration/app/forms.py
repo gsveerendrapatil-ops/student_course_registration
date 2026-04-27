@@ -24,7 +24,6 @@ class StudentForm(BootstrapModelForm):
             "course_name": "Course Name",
             "course_fee": "Course Fee",
             "admition_date": "Admission Date",
-            "st_photo": "Profile Photo",
             "st_active": "Status",
         }
         widgets = {
